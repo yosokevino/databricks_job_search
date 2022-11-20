@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block index_page %}
+
+<center><h2>Databricks Job Keyword Search Engine</h2></center>
+
+<p>Welcome to my Databricks keyword job search engine. I noticed that the Databricks job <a href="https://www.databricks.com/company/careers/open-positions">site</a> does not have keyword searching, so I implemented one myself.
+    I pull the job data from Databricks, do some keyword extraction using NLP and return it as an API that feeds this tool. <strong>Good hunting!</strong>
+</p>
+<p>-Kevin</p>
+
+<div class="container" style="box-shadow: rgb(46 56 64 / 12%) 0px 4px 16px;padding: 20px;margin-top: 20px;">
+
+    <h4>Search Databricks Jobs</h4>
+
+    <form action="/" method="post" role="form" id="search_form">
+        <div class="mb-3">
+        <input type="text" name="searchterms_name" class="form-control" id="searchterms">
+        <small>Enter Search Terms Separated By ","</small>
+        </div>
+        <button type="submit" class="btn btn-success">Search</button>
+    </form>
+
+</div>
+
+<div class="container" style="box-shadow: rgb(46 56 64 / 12%) 0px 4px 16px; margin-top: 20px; padding: 20px; margin-bottom: 80px;"">
+
+    <h4>Search Results: {{job_count}} Jobs Found</h4>
+    <p><strong>Search Terms</strong>: {{search_terms}}</p>
+    
+    {% if jobs == 'No Results Found' %}
+        <p>No Results Found</p>
+    {% else  %}
+        {% for job in jobs %}
+            <form action="/job" method="post" role="form" id="job_form">
+                <div class="d-grid gap-2" style="margin: 5px;">
+                    <input type="text" name="job_id_name" class="form-control" id="job_id" value="{{job['id']}}" hidden>
+                    <input type="text" name="job_id_search_terms" class="form-control" id="job_id_searchterms" value="{{search_terms}}" hidden>
+                    <button type="submit" class="btn btn-light" style="text-align:left; padding-left:6px"><p><strong>{{job['title']}}</strong>, {{job['location']}}</p></button>
+                </div>
+            </form>
+        {% endfor %}
+    {% endif %}
+</div>
+
+{% endblock %}
