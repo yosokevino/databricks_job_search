@@ -2,13 +2,12 @@
 
 {% block job_page %}
 
-<div class="container" style="box-shadow: rgb(46 56 64 / 12%) 0px 4px 16px;padding: 20px;">
-    {{job_content|safe}}
+<div class="container" style="box-shadow: rgb(46 56 64 / 12%) 0px 4px 16px;padding: 20px;margin-bottom: 80px;">
+    {{job_content|safe}}</strong>
 </div>
-<div class="btn-group d-flex" role="group" aria-label="..." style=" margin-bottom: 80px;">
+<div class="btn-group d-flex" role="group" aria-label="...">
     <button type="button" onclick="history.back()" class="btn btn-dark w-100">Back</button>
     <a href="https://www.databricks.com/company/careers/open-positions/job?gh_jid={{job_id}}" class="btn btn-success w-100" role="button" target="_blank">Apply</a>
-  </div>
-
+</div>
 
 {% endblock %}
